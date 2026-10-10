@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app_network
+
+  # The C++ Backend Server
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.server
+    # Run the server on port 8080
+    command: ./server 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
+  # The Node.js Web Application
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - uploads_data:/usr/src/app/public/uploads
+    environment:
+      # Tell the web app to connect to the C++ 'server' container
+      - EX2_SERVER_HOST=server
+      - MONGO_URI=mongodb://mongo:27017/wolt
+      # Override with your own secret: JWT_SECRET=... docker compose up
+      - JWT_SECRET=${JWT_SECRET:-change-me-dev-only}
+    depends_on:
+      - server
+      - mongo
+    networks:
+      - app_network
+
+  # The React Frontend Client
+  frontend:
+    build:
+      context: ./ui
+      dockerfile: web/Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./ui/web:/app/web
+      - ./ui/shared:/app/shared
+      - /app/web/node_modules
+    depends_on:
+      - web
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  uploads_data:

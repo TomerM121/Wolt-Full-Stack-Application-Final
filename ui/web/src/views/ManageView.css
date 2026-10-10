@@ -1,0 +1,94 @@
+.manage-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.manage-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.manage-section {
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.manage-section h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.manage-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.manage-section input,
+.manage-section select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.manage-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.manage-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.manage-btn-primary {
+    background-color: #009de0;
+    color: white;
+}
+
+.manage-btn-primary:hover:not(:disabled) {
+    background-color: #007eb5;
+}
+
+.manage-btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.manage-btn-danger:hover:not(:disabled) {
+    background-color: #c82333;
+}
+
+.danger-section {
+    border-color: #f5c6cb;
+    background-color: #fdf2f3;
+}
+
+.danger-section h2 {
+    color: #dc3545;
+}
+
+.manage-success {
+    color: #28a745;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.manage-error {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
